@@ -73,7 +73,6 @@ const imageLoaded = ref(false)
 const delayPassed = ref(false)
 
 const shouldLoad = computed(() => {
-  console.log('what')
   return imageLoaded.value && delayPassed.value
 })
 

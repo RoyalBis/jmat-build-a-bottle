@@ -6,7 +6,8 @@ export default {
     extend: {
       fontFamily: {
         header: ['Baskervville', 'serif'],
-        body: ['Courier Prime', 'monospace']
+        body: ['Courier Prime', 'monospace'],
+        bottle: ['anotherfool', 'sans-serif']
       }
     }
   },

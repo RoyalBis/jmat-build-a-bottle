@@ -1,85 +1,103 @@
 <template>
-  <div class="">
+  <div>
     <div
-      v-if="isLoading"
-      class="w-screen h-screen min-h-100 flex flex-col justify-center items-center bg-stone-900 scale-100"
+      v-if="shouldDisplayLoader"
+      class="w-screen min-h-screen flex flex-col justify-center items-center bg-stone-900 scale-100"
     >
+      <div class="max-w-[90%] h-32 md:mb-12 mb-0 flex flex-col justify-center items-center">
+        <img :src="CraftYourBottle" />
+      </div>
       <LoadingAnimation />
     </div>
     <div
-      v-if="!isLoading"
-      class="relative min-h-100 max-h-screen h-screen bg-slate-800 flex flex-col justify-center items-center"
+      v-if="!shouldDisplayLoader"
+      class="relative w-full min-h-screen h-auto bg-slate-800 flex flex-col justify-top items-center"
       :style="backgroundImageStyle"
     >
-      <div class="w-full h-32 mb-12 flex flex-col justify-center items-center">
-        <img :src="CraftYourBottle" />
+      <div>
+        <div
+          class="hover:scale-110 cursor-pointer transition-all duration-1000"
+          @click="handleExitClicked"
+        >
+          <p class="my-4 font-header text-lg text-white text-center underline">
+            Back to J. Mattingly
+          </p>
+        </div>
+        <div
+          class="max-w-[75%] md:max-w-[90%] mt-4 md:mb-12 mb-12 flex flex-col justify-center items-center"
+        >
+          <img :src="CraftYourBottle" />
+        </div>
       </div>
-      <Transition name="fade" @before-enter="beforeEnter" @leave="leave">
-        <SelectWhiskey
-          v-if="currentStep === Step.SelectWhiskey"
-          class="grow min-w-screen w-screen flex flex-row justify-start items-center transition-opacity"
-          @selected="handleNext(bottleStore.hasWhiskey)"
-        >
-          <template #navigation>
-            <Navigation
-              class="justify-end"
-              @next="handleNext"
-              @previous="handlePrevious"
-              :current-step="currentStep"
-              :number-of-steps="steps.length"
-            />
-          </template>
-        </SelectWhiskey>
-      </Transition>
-      <Transition name="fade" @before-enter="beforeEnter" @leave="leave">
-        <SelectBottle
-          v-if="currentStep === Step.SelectBottle"
-          class="grow min-w-screen min-h-screen max-h-screen w-screen flex flex-row justify-center items-center"
-          @selected="handleNext"
-        >
-          <template #navigation>
-            <Navigation
-              class="justify-end"
-              @next="handleNext(bottleStore.hasBottle)"
-              @previous="handlePrevious"
-              :current-step="currentStep"
-              :number-of-steps="steps.length"
-            />
-          </template>
-        </SelectBottle>
-      </Transition>
-      <Transition name="fade" @before-enter="beforeEnter" @leave="leave">
-        <SelectBottleTop
-          v-if="currentStep === Step.SelectTop"
-          class="grow min-w-screen max-h-screen w-screen flex flex-row justify-center items-center"
-        >
-          <template #navigation>
-            <Navigation
-              class="justify-end"
-              @next="handleNext(bottleStore.hasBottleTop)"
-              @previous="handlePrevious"
-              :current-step="currentStep"
-              :number-of-steps="steps.length"
-            />
-          </template>
-        </SelectBottleTop>
-      </Transition>
-      <Transition name="fade" @before-enter="beforeEnter" @leave="leave">
-        <BottleReview
-          v-if="currentStep === Step.Review"
-          class="grow min-w-screen max-h-screen w-screen flex flex-row justify-center items-center"
-        >
-          <template #navigation>
-            <Navigation
-              class="justify-end"
-              @next="handleNext(bottleStore.isValid)"
-              @previous="handlePrevious"
-              :current-step="currentStep"
-              :number-of-steps="steps.length"
-            />
-          </template>
-        </BottleReview>
-      </Transition>
+      <div class="w-11/12 flex flex-col justify-center items-center">
+        <Transition name="fade" @before-enter="beforeEnter" @leave="leave">
+          <SelectWhiskey
+            v-if="currentStep === Step.SelectWhiskey"
+            class="flex flex-row justify-start items-center transition-opacity"
+            @selected="handleNext(bottleStore.hasWhiskey)"
+          >
+            <template #navigation>
+              <Navigation
+                class="justify-end"
+                @next="handleNext"
+                @previous="handlePrevious"
+                :current-step="currentStep"
+                :number-of-steps="steps.length"
+              />
+            </template>
+          </SelectWhiskey>
+        </Transition>
+        <Transition name="fade" @before-enter="beforeEnter" @leave="leave">
+          <SelectBottle
+            v-if="currentStep === Step.SelectBottle"
+            class="flex flex-row justify-center items-center"
+            @selected="handleNext"
+          >
+            <template #navigation>
+              <Navigation
+                class="justify-end"
+                @next="handleNext(bottleStore.hasBottle)"
+                @previous="handlePrevious"
+                :current-step="currentStep"
+                :number-of-steps="steps.length"
+              />
+            </template>
+          </SelectBottle>
+        </Transition>
+        <Transition name="fade" @before-enter="beforeEnter" @leave="leave">
+          <SelectBottleTop
+            v-if="currentStep === Step.SelectTop"
+            class="flex flex-row justify-center items-center"
+          >
+            <template #navigation>
+              <Navigation
+                class="justify-end"
+                @next="handleNext(bottleStore.hasBottleTop)"
+                @previous="handlePrevious"
+                :current-step="currentStep"
+                :number-of-steps="steps.length"
+              />
+            </template>
+          </SelectBottleTop>
+        </Transition>
+        <Transition name="fade" @before-enter="beforeEnter" @leave="leave">
+          <BottleReview
+            v-if="currentStep === Step.Review"
+            class="flex flex-row justify-center items-center"
+            @checkout="handleCheckout"
+          >
+            <template #navigation>
+              <Navigation
+                class="justify-end"
+                @next="handleNext(bottleStore.isValid)"
+                @previous="handlePrevious"
+                :current-step="currentStep"
+                :number-of-steps="steps.length"
+              />
+            </template>
+          </BottleReview>
+        </Transition>
+      </div>
     </div>
   </div>
 </template>
@@ -94,7 +112,7 @@ import BottleReview from '@/components/BottleReview.vue'
 import Navigation from '@/components/Navigation.vue'
 import LoadingAnimation from '@/components/LoadingAnimation.vue'
 
-import { TBBTallCanBishop, Background, CraftYourBottle } from '@/assets'
+import { Background, CraftYourBottle } from '@/assets'
 
 import { useBottleStore } from '@/stores/bottle'
 import router from '@/router'
@@ -102,9 +120,12 @@ import router from '@/router'
 import { useImagePreloader } from '@/composables/useImagePreloader'
 import { variantImages } from '@/constants'
 
-const { isLoading, loadedImages } = useImagePreloader(variantImages)
+const isLoadingTimeoutOver = ref(false)
+const { isLoading } = useImagePreloader(variantImages)
 
 const bottleStore = useBottleStore()
+
+const isCheckout = ref(false)
 
 const enum Step {
   SelectWhiskey = 0,
@@ -115,12 +136,8 @@ const enum Step {
 
 const steps = ref([Step.SelectWhiskey, Step.SelectBottle, Step.SelectTop, Step.Review])
 
-interface HTMLModelViewer extends HTMLElement {
-  model: any
-}
-
 function beforeEnter(el: Element) {
-  // ;(el as HTMLElement).style.opacity = '1'
+  ;(el as HTMLElement).style.opacity = '1'
 }
 
 function leave(el: Element, done: () => void) {
@@ -130,32 +147,14 @@ function leave(el: Element, done: () => void) {
 
 const currentStep = ref<Step>(Step.SelectWhiskey)
 
-const modelViewerRef = ref<HTMLModelViewer | null>(null)
-
-// const bottleImage = computed(() => {
-//   switch (currentBottle.value) {
-//     case 'WoodCork':
-//       return EssexWoodCork
-//     case 'RedWax':
-//       return EssexWaxRed
-//     case 'GreenWax':
-//       return EssexWaxGreen
-//     default:
-//       return EssexWoodCork
-//   }
-// })
-
-// function setColor(color: string) {
-//   if (!modelViewerRef.value?.model) return
-
-//   const [material] = modelViewerRef.value.model.materials
-//   material.pbrMetallicRoughness.setBaseColorFactor(color)
-// }
-
 const backgroundImageStyle = computed(() => {
   return {
     backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, .8), rgba(0, 0, 0, .1)), linear-gradient(to top, rgba(0, 0, 0, .8), rgba(0, 0, 0, .1)), linear-gradient(to left, rgba(0, 0, 0, .5), rgba(0, 0, 0, .1)), linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .1)), url(${Background})`
   }
+})
+
+const shouldDisplayLoader = computed(() => {
+  return (isLoading.value && !isLoadingTimeoutOver.value) || isCheckout.value
 })
 
 function handlePrevious() {
@@ -175,16 +174,18 @@ function handleNext(valid: boolean = true) {
   }
 }
 
-onMounted(() => {
-  const modelViewerColor = modelViewerRef.value
-  const colorControls = document.getElementById('color-controls')
+function handleCheckout() {
+  isCheckout.value = true
+}
 
-  if (modelViewerColor && colorControls) {
-    colorControls.addEventListener('click', (event) => {
-      const target = event.target as HTMLElement
-      const colorString = target.dataset.color
-    })
-  }
+function handleExitClicked() {
+  window.location.href = 'https://jmattingly1845.myshopify.com/'
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    isLoadingTimeoutOver.value = true
+  }, 3000)
 })
 </script>
 

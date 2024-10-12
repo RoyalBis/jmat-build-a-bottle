@@ -6,16 +6,14 @@
       @load="isBottleLoaded = true"
       @unload="isBottleLoaded = false"
     />
-    <img
-      v-if="isBottleLoaded"
-      class="absolute w-[95%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-[20%]"
-      :src="Label"
-    />
-    <div
-      v-if="isBottleLoaded"
-      class="absolute w-[95%] top-[57.5%] left-1/2 -translate-x-1/2 -translate-y-1/2 font-header text-center text-neutral-300"
-      v-html="formattedText"
-    ></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[20%] w-[95%]">
+      <img v-if="isBottleLoaded" class="" :src="Label" />
+      <div
+        v-if="isBottleLoaded"
+        class="absolute w-[95%] top-[37%] left-1/2 -translate-x-1/2 -translate-y-1/2 font-bottle font-bold leading-none text-2xl text-center text-neutral-300"
+        v-html="formattedText"
+      ></div>
+    </div>
   </div>
 </template>
 

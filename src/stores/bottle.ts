@@ -70,6 +70,21 @@ export const useBottleStore = defineStore('bottle', () => {
     })
   )
 
+  const selectedOptions = ref(
+    computed(() => {
+      return [
+        {
+          name: 'Whiskey',
+          value: whiskey.value?.name
+        },
+        {
+          name: 'Bottle',
+          value: bottle.value?.name
+        }
+      ]
+    })
+  )
+
   function setWhiskey(_whiskey: Whiskey) {
     whiskey.value = _whiskey
   }
@@ -99,6 +114,7 @@ export const useBottleStore = defineStore('bottle', () => {
     hasBottle,
     hasBottleTop,
     isValid,
+    selectedOptions,
     reset,
     setWhiskey,
     setBottle,

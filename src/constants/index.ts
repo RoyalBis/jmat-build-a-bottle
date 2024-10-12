@@ -1,10 +1,12 @@
 import type { Whiskey, Bottle, BottleTop } from '@/types'
+import { IconHalloween } from '@/assets'
 
 import {
   EssexBlackWax,
   EssexCopperWax,
   EssexGoldWax,
   EssexGunmetalGreyWax,
+  EssexHalloweenWax,
   EssexHunterGreenWax,
   EssexLightBlueWax,
   EssexLightGreenWax,
@@ -21,6 +23,7 @@ import {
   GettyCopperWax,
   GettyGoldWax,
   GettyGunmetalGreyWax,
+  GettyHalloweenWax,
   GettyHunterGreenWax,
   GettyLightBlueWax,
   GettyLightGreenWax,
@@ -36,6 +39,7 @@ import {
   BlackwellCopperWax,
   BlackwellGoldWax,
   BlackwellGunmetalGreyWax,
+  BlackwellHalloweenWax,
   BlackwellHunterGreenWax,
   BlackwellLightBlueWax,
   BlackwellLightGreenWax,
@@ -109,83 +113,89 @@ export const bottles: Array<Bottle> = [
 export const bottleTops: Array<BottleTop> = [
   {
     color: '#9B2929',
-    name: 'Red Wax',
+    name: 'Red',
     value: 'RedWax'
   },
   {
     color: '#EA7737',
-    name: 'Orange Wax',
+    name: 'Orange',
     value: 'OrangeWax'
   },
   {
     color: '#CD6B24',
-    name: 'Copper Wax',
+    name: 'Copper',
     value: 'CopperWax'
   },
   {
     color: '#D5A836',
-    name: 'Gold Wax',
+    name: 'Gold',
     value: 'GoldWax'
   },
   {
     color: '#ECD71B',
-    name: 'Yellow Wax',
+    name: 'Yellow',
     value: 'YellowWax'
   },
   {
     color: '#A1D183',
-    name: 'Light Green Wax',
+    name: 'Light Green',
     value: 'LightGreenWax'
   },
   {
     color: '#C9FFC4',
-    name: 'Pearl Green Wax',
+    name: 'Pearl Green',
     value: 'PearlGreenWax'
   },
   {
     color: '#4E833B',
-    name: 'Hunter Green Wax',
+    name: 'Hunter Green',
     value: 'HunterGreenWax'
   },
   {
     color: '#6FCBE0',
-    name: 'Light Blue Wax',
+    name: 'Light Blue',
     value: 'LightBlueWax'
   },
   {
     color: '#4C7FBC',
-    name: 'Navy Wax',
+    name: 'Navy',
     value: 'NavyWax'
   },
   {
     color: '#293EB2',
-    name: 'Royal Blue Wax',
+    name: 'Royal Blue',
     value: 'RoyalBlueWax'
   },
   {
     color: '#6947C8',
-    name: 'Purple Wax',
+    name: 'Purple',
     value: 'PurpleWax'
   },
   {
     color: '#FFF7F2',
-    name: 'White Wax',
+    name: 'White',
     value: 'WhiteWax'
   },
   {
     color: '#B1B1B1',
-    name: 'Silver Wax',
+    name: 'Silver',
     value: 'SilverWax'
   },
   {
     color: '#040404',
-    name: 'Black Wax',
+    name: 'Black',
     value: 'BlackWax'
   },
   {
     color: '#606060',
-    name: 'Gunmetal Grey Wax',
+    name: 'Gunmetal Grey',
     value: 'GunmetalGreyWax'
+  },
+  {
+    color: '#040404',
+    name: 'Halloween',
+    value: 'HalloweenWax',
+    icon: IconHalloween
   }
 ]
 
@@ -194,6 +204,7 @@ export const variantImages = [
   EssexCopperWax,
   EssexGoldWax,
   EssexGunmetalGreyWax,
+  EssexHalloweenWax,
   EssexHunterGreenWax,
   EssexLightBlueWax,
   EssexLightGreenWax,
@@ -210,6 +221,7 @@ export const variantImages = [
   GettyCopperWax,
   GettyGoldWax,
   GettyGunmetalGreyWax,
+  GettyHalloweenWax,
   GettyHunterGreenWax,
   GettyLightBlueWax,
   GettyLightGreenWax,
@@ -225,6 +237,7 @@ export const variantImages = [
   BlackwellCopperWax,
   BlackwellGoldWax,
   BlackwellGunmetalGreyWax,
+  BlackwellHalloweenWax,
   BlackwellHunterGreenWax,
   BlackwellLightBlueWax,
   BlackwellLightGreenWax,

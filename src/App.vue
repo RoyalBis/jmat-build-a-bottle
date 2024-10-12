@@ -1,35 +1,4 @@
-<script setup lang="ts">
-// import { ref, onMounted } from 'vue'
-// import { TBBTallCanBishop } from '@/assets'
-
-// interface HTMLModelViewer extends HTMLElement {
-//   model: any
-// }
-
-// const modelViewerRef = ref<HTMLModelViewer | null>(null)
-
-// function setColor(color: string) {
-//   if (!modelViewerRef.value?.model) return
-//   const [material] = modelViewerRef.value.model.materials
-//   material.pbrMetallicRoughness.setBaseColorFactor(color)
-// }
-
-// onMounted(() => {
-//   const modelViewerColor = modelViewerRef.value
-//   const colorControls = document.getElementById('color-controls')
-
-//   if (modelViewerColor && colorControls) {
-//     colorControls.addEventListener('click', (event) => {
-//       const target = event.target as HTMLElement
-//       const colorString = target.dataset.color
-
-//       console.log('color clicked')
-//     })
-//   }
-// })
-</script>
-
-<!-- Use it like any other HTML element -->
+<script setup lang="ts"></script>
 
 <template>
   <RouterView />

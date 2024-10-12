@@ -7,11 +7,13 @@ import Label from '@/assets/label.png'
 import Background from '@/assets/jmattingly-background.jpeg'
 import CraftYourBottle from '@/assets/craft-your-bottle.png'
 import WoodBarrelTop from '@/assets/WoodBarrel-Top.png'
+import IconHalloween from '@/assets/halloween.svg'
 
 import EssexBlackWax from '@/assets/variants/Essex-BlackWax.png'
 import EssexCopperWax from '@/assets/variants/Essex-CopperWax.png'
 import EssexGoldWax from '@/assets/variants/Essex-GoldWax.png'
 import EssexGunmetalGreyWax from '@/assets/variants/Essex-GunmetalGreyWax.png'
+import EssexHalloweenWax from '@/assets/variants/Essex-HalloweenWax.png'
 import EssexHunterGreenWax from '@/assets/variants/Essex-HunterGreenWax.png'
 import EssexLightBlueWax from '@/assets/variants/Essex-LightBlueWax.png'
 import EssexLightGreenWax from '@/assets/variants/Essex-LightGreenWax.png'
@@ -29,6 +31,7 @@ import GettyBlackWax from '@/assets/variants/Getty-BlackWax.png'
 import GettyCopperWax from '@/assets/variants/Getty-CopperWax.png'
 import GettyGoldWax from '@/assets/variants/Getty-GoldWax.png'
 import GettyGunmetalGreyWax from '@/assets/variants/Getty-GunmetalGreyWax.png'
+import GettyHalloweenWax from '@/assets/variants/Getty-HalloweenWax.png'
 import GettyHunterGreenWax from '@/assets/variants/Getty-HunterGreenWax.png'
 import GettyLightBlueWax from '@/assets/variants/Getty-LightBlueWax.png'
 import GettyLightGreenWax from '@/assets/variants/Getty-LightGreenWax.png'
@@ -46,6 +49,7 @@ import BlackwellBlackWax from '@/assets/variants/Blackwell-BlackWax.png'
 import BlackwellCopperWax from '@/assets/variants/Blackwell-CopperWax.png'
 import BlackwellGoldWax from '@/assets/variants/Blackwell-GoldWax.png'
 import BlackwellGunmetalGreyWax from '@/assets/variants/Blackwell-GunmetalGreyWax.png'
+import BlackwellHalloweenWax from '@/assets/variants/Blackwell-HalloweenWax.png'
 import BlackwellHunterGreenWax from '@/assets/variants/Blackwell-HunterGreenWax.png'
 import BlackwellLightBlueWax from '@/assets/variants/Blackwell-LightBlueWax.png'
 import BlackwellLightGreenWax from '@/assets/variants/Blackwell-LightGreenWax.png'
@@ -64,12 +68,14 @@ export { TBBTallCanBishop }
 export { EssexWoodCork, GettyWoodCork, BlackwellWoodCork }
 export { Label }
 export { Background, CraftYourBottle, WoodBarrelTop }
+export { IconHalloween }
 
 export {
   EssexBlackWax,
   EssexCopperWax,
   EssexGoldWax,
   EssexGunmetalGreyWax,
+  EssexHalloweenWax,
   EssexHunterGreenWax,
   EssexLightBlueWax,
   EssexLightGreenWax,
@@ -86,6 +92,7 @@ export {
   GettyCopperWax,
   GettyGoldWax,
   GettyGunmetalGreyWax,
+  GettyHalloweenWax,
   GettyHunterGreenWax,
   GettyLightBlueWax,
   GettyLightGreenWax,
@@ -97,10 +104,12 @@ export {
   GettyRoyalBlueWax,
   GettySilverWax,
   GettyWhiteWax,
+  GettyYellowWax,
   BlackwellBlackWax,
   BlackwellCopperWax,
   BlackwellGoldWax,
   BlackwellGunmetalGreyWax,
+  BlackwellHalloweenWax,
   BlackwellHunterGreenWax,
   BlackwellLightBlueWax,
   BlackwellLightGreenWax,
@@ -111,5 +120,6 @@ export {
   BlackwellRedWax,
   BlackwellRoyalBlueWax,
   BlackwellSilverWax,
-  BlackwellWhiteWax
+  BlackwellWhiteWax,
+  BlackwellYellowWax
 }

@@ -19,4 +19,5 @@ export interface BottleTop {
   name: string
   value: string
   color: string
+  icon?: string
 }

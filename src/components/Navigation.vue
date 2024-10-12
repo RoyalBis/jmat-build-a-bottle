@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-row gap-4">
+  <div class="w-full flex flex-row justify-center items-center gap-4">
     <div
       v-if="currentStep > 0"
-      class="w-11 h-11 flex flex-col justify-center items-center bg-white cursor-pointer"
+      class="max-w-1/2 w-1/2 h-16 flex flex-row justify-center items-center gap-4 bg-transparent border border-white cursor-pointer"
       @click="emit('previous')"
     >
       <svg
@@ -12,14 +12,17 @@
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <path d="M10 1L2 9L10 17" stroke="#070707" stroke-width="1.5" />
+        <path d="M10 1L2 9L10 17" stroke="#ffffff" stroke-width="1.5" />
       </svg>
+      <p class="font-header font-bold text-xl text-white upperclass">Previous</p>
     </div>
     <div
       v-if="currentStep < numberOfSteps - 1"
-      class="w-11 h-11 flex flex-col justify-center items-center bg-black border border-white cursor-pointer"
+      class="max-1/2 w-1/2 h-16 flex flex-row justify-center items-center gap-4 bg-white border border-white cursor-pointer"
       @click="emit('next')"
     >
+      <p class="font-header font-bold text-xl text-black upperclass">Next</p>
+
       <svg
         width="11"
         height="18"
@@ -27,7 +30,7 @@
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <path d="M1 17L9 9L1 1" stroke="#FFFDEF" stroke-width="1.5" />
+        <path d="M1 17L9 9L1 1" stroke="#000000" stroke-width="1.5" />
       </svg>
     </div>
   </div>
