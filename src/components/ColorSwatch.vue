@@ -41,8 +41,4 @@ const strokeWidth = computed(() => {
   if (!props.isSelected) return 1
   return 3
 })
-
-watchEffect(() => {
-  console.log(props.icon)
-})
 </script>

@@ -17,10 +17,38 @@
       <p class="font-header text-lg text-white">Bottle Text:</p>
       <p class="font-body text-lg text-white">{{ bottleStore.bottleText }}</p>
       <div class="w-full h-px bg-white"></div>
-      <p class="font-header text-lg text-white">Cost:</p>
-      <p v-if="variant" class="font-body text-lg text-white">
-        ${{ Number(variant.price.amount).toFixed(2) }} {{ variant.price.currency }}
-      </p>
+      <div class="w-full flex flex-row">
+        <div class="w-full flex flex-col gap-2">
+          <p class="font-header text-lg text-white">Quantity:</p>
+          <div class="flex flex-row items-center justify-between gap-2">
+            <div class="flex flex-row items-center justify-between gap-2">
+              <div
+                class="w-10 h-10 rounded flex flex-row justify-center items-center bg-white"
+                @click="decrementQty"
+              >
+                <p class="font-body text-2xl text-black">-</p>
+              </div>
+              <div
+                class="w-10 h-10 flex flex-row justify-center items-center bg-transparend border-white border rounded"
+              >
+                <p class="font-body text-xl text-white">{{ quantity }}</p>
+              </div>
+              <div
+                class="w-10 h-10 rounded flex flex-row justify-center items-center bg-white"
+                @click="incrementQty"
+              >
+                <p class="font-body text-2xl text-black">+</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <p class="font-header text-lg text-white">Cost:</p>
+          <p v-if="variant" class="font-body text-lg text-white">
+            ${{ (Number(variant.price.amount) * quantity).toFixed(2) }} {{ variant.price.currency }}
+          </p>
+        </div>
+      </div>
       <div class="h-16 mt-8 flex flex-row justify-center gap-4">
         <button
           class="w-1/2 px-8 py-4 rounded bg-white font-header text-xl font-semibold text-black"
@@ -57,13 +85,26 @@ const { getProductById, createCart } = useShopify()
 
 const variant = ref<ProductVariant | undefined>()
 
+const quantity = ref(1)
+
+function decrementQty() {
+  if (quantity.value > 1) quantity.value--
+}
+
+function incrementQty() {
+  quantity.value++
+}
+
 async function handleCheckout() {
   emit('checkout')
   if (!variant.value) return
   const cart = await createCart(
-    variant.value.id,
-    bottleStore.bottleTop?.name ?? '',
-    bottleStore.bottleText ?? ''
+    {
+      id: variant.value.id,
+      wax: bottleStore.bottleTop?.name ?? '',
+      text: bottleStore.bottleText ?? ''
+    },
+    quantity.value
   )
 
   if (cart.data['cartCreate']['cart']['checkoutUrl']) {
@@ -73,12 +114,11 @@ async function handleCheckout() {
 }
 
 onMounted(async () => {
-  const { data, errors, extensions } = await getProductById('8445493182595')
+  const { data } = await getProductById('8445493182595')
   variant.value = findMatchingVariant(
     data['product']['variants']['nodes'],
     bottleStore.selectedOptions
   )
-  console.log(variant.value)
 
   if (!variant.value?.id) return
 })

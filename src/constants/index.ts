@@ -1,8 +1,10 @@
 import type { Whiskey, Bottle, BottleTop } from '@/types'
-import { IconHalloween } from '@/assets'
+import { IconHalloween, IconCandyCane, IconChristmasTree, IconHeart } from '@/assets'
 
 import {
   EssexBlackWax,
+  EssexCandyCaneWax,
+  EssexChristmasTreeWax,
   EssexCopperWax,
   EssexGoldWax,
   EssexGunmetalGreyWax,
@@ -10,16 +12,21 @@ import {
   EssexHunterGreenWax,
   EssexLightBlueWax,
   EssexLightGreenWax,
+  EssexBlueWax,
   EssexNavyWax,
   EssexOrangeWax,
   EssexPearlGreenWax,
+  EssexPinkWax,
   EssexPurpleWax,
   EssexRedWax,
   EssexRoyalBlueWax,
   EssexSilverWax,
+  EssexValentinesWax,
   EssexWhiteWax,
   EssexYellowWax,
   GettyBlackWax,
+  GettyCandyCaneWax,
+  GettyChristmasTreeWax,
   GettyCopperWax,
   GettyGoldWax,
   GettyGunmetalGreyWax,
@@ -27,15 +34,20 @@ import {
   GettyHunterGreenWax,
   GettyLightBlueWax,
   GettyLightGreenWax,
+  GettyBlueWax,
   GettyNavyWax,
   GettyOrangeWax,
   GettyPearlGreenWax,
+  GettyPinkWax,
   GettyPurpleWax,
   GettyRedWax,
   GettyRoyalBlueWax,
   GettySilverWax,
+  GettyValentinesWax,
   GettyWhiteWax,
   BlackwellBlackWax,
+  BlackwellCandyCaneWax,
+  BlackwellChristmasTreeWax,
   BlackwellCopperWax,
   BlackwellGoldWax,
   BlackwellGunmetalGreyWax,
@@ -43,15 +55,25 @@ import {
   BlackwellHunterGreenWax,
   BlackwellLightBlueWax,
   BlackwellLightGreenWax,
+  BlackwellBlueWax,
   BlackwellNavyWax,
   BlackwellOrangeWax,
   BlackwellPearlGreenWax,
+  BlackwellPinkWax,
   BlackwellPurpleWax,
   BlackwellRedWax,
   BlackwellRoyalBlueWax,
   BlackwellSilverWax,
+  BlackwellValentinesWax,
   BlackwellWhiteWax
 } from '@/assets'
+
+export const enum Step {
+  SelectWhiskey = 0,
+  SelectBottle,
+  SelectTop,
+  Review
+}
 
 export const whiskeys: Array<Whiskey> = [
   {
@@ -158,6 +180,11 @@ export const bottleTops: Array<BottleTop> = [
   },
   {
     color: '#4C7FBC',
+    name: 'Blue',
+    value: 'BlueWax'
+  },
+  {
+    color: '#000080',
     name: 'Navy',
     value: 'NavyWax'
   },
@@ -191,16 +218,41 @@ export const bottleTops: Array<BottleTop> = [
     name: 'Gunmetal Grey',
     value: 'GunmetalGreyWax'
   },
-  {
-    color: '#040404',
-    name: 'Halloween',
-    value: 'HalloweenWax',
-    icon: IconHalloween
-  }
+  // {
+  //   color: '#040404',
+  //   name: 'Halloween',
+  //   value: 'HalloweenWax',
+  //   icon: IconHalloween
+  // },
+  // {
+  //   color: '#FFFFFF',
+  //   name: 'Candy Cane',
+  //   value: 'CandyCaneWax',
+  //   icon: IconCandyCane
+  // },
+  // {
+  //   color: '#9B2929',
+  //   name: 'Christmas Tree',
+  //   value: 'ChristmasTreeWax',
+  //   icon: IconChristmasTree
+  // },
+  // {
+  //   color: '#FFFFFF',
+  //   name: 'Valentines Swirl',
+  //   value: 'ValentinesWax',
+  //   icon: IconHeart
+  // },
+  // {
+  //   color: '#FF60BC',
+  //   name: 'Valentines Pink',
+  //   value: 'PinkWax'
+  // }
 ]
 
 export const variantImages = [
   EssexBlackWax,
+  EssexCandyCaneWax,
+  EssexChristmasTreeWax,
   EssexCopperWax,
   EssexGoldWax,
   EssexGunmetalGreyWax,
@@ -208,16 +260,21 @@ export const variantImages = [
   EssexHunterGreenWax,
   EssexLightBlueWax,
   EssexLightGreenWax,
+  EssexBlueWax,
   EssexNavyWax,
   EssexOrangeWax,
   EssexPearlGreenWax,
+  EssexPinkWax,
   EssexPurpleWax,
   EssexRedWax,
   EssexRoyalBlueWax,
   EssexSilverWax,
+  EssexValentinesWax,
   EssexWhiteWax,
   EssexYellowWax,
   GettyBlackWax,
+  GettyCandyCaneWax,
+  GettyChristmasTreeWax,
   GettyCopperWax,
   GettyGoldWax,
   GettyGunmetalGreyWax,
@@ -225,15 +282,20 @@ export const variantImages = [
   GettyHunterGreenWax,
   GettyLightBlueWax,
   GettyLightGreenWax,
+  GettyBlueWax,
   GettyNavyWax,
   GettyOrangeWax,
   GettyPearlGreenWax,
+  GettyPinkWax,
   GettyPurpleWax,
   GettyRedWax,
   GettyRoyalBlueWax,
   GettySilverWax,
+  GettyValentinesWax,
   GettyWhiteWax,
   BlackwellBlackWax,
+  BlackwellCandyCaneWax,
+  BlackwellChristmasTreeWax,
   BlackwellCopperWax,
   BlackwellGoldWax,
   BlackwellGunmetalGreyWax,
@@ -241,12 +303,15 @@ export const variantImages = [
   BlackwellHunterGreenWax,
   BlackwellLightBlueWax,
   BlackwellLightGreenWax,
+  BlackwellBlueWax,
   BlackwellNavyWax,
   BlackwellOrangeWax,
   BlackwellPearlGreenWax,
+  BlackwellPinkWax,
   BlackwellPurpleWax,
   BlackwellRedWax,
   BlackwellRoyalBlueWax,
   BlackwellSilverWax,
+  BlackwellValentinesWax,
   BlackwellWhiteWax
 ]

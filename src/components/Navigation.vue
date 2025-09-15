@@ -1,7 +1,7 @@
 <template>
   <div class="w-full flex flex-row justify-center items-center gap-4">
     <div
-      v-if="currentStep > 0"
+      v-if="hasPrevious"
       class="max-w-1/2 w-1/2 h-16 flex flex-row justify-center items-center gap-4 bg-transparent border border-white cursor-pointer"
       @click="emit('previous')"
     >
@@ -17,7 +17,7 @@
       <p class="font-header font-bold text-xl text-white upperclass">Previous</p>
     </div>
     <div
-      v-if="currentStep < numberOfSteps - 1"
+      v-if="hasNext"
       class="max-1/2 w-1/2 h-16 flex flex-row justify-center items-center gap-4 bg-white border border-white cursor-pointer"
       @click="emit('next')"
     >
@@ -37,14 +37,7 @@
 </template>
 
 <script setup lang="ts">
-// Props
-export interface Props {
-  currentStep: number
-  numberOfSteps: number
-}
-
-const props = withDefaults(defineProps<Props>(), {})
-// End Props
+import { useNavigation } from '@/composables/navigation'
 
 //Events
 const emit = defineEmits<{
@@ -52,4 +45,6 @@ const emit = defineEmits<{
   (e: 'next'): void
 }>()
 //End Events
+
+const { hasNext, hasPrevious } = useNavigation()
 </script>

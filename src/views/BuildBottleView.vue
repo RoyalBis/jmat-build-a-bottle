@@ -11,10 +11,10 @@
     </div>
     <div
       v-if="!shouldDisplayLoader"
-      class="relative w-full min-h-screen h-auto bg-slate-800 flex flex-col justify-top items-center"
+      class="relative w-full min-h-screen h-auto bg-slate-800 flex flex-col justify-center items-center"
       :style="backgroundImageStyle"
     >
-      <div>
+      <div class="w-full flex flex-col items-center">
         <div
           class="hover:scale-110 cursor-pointer transition-all duration-1000"
           @click="handleExitClicked"
@@ -32,18 +32,12 @@
       <div class="w-11/12 flex flex-col justify-center items-center">
         <Transition name="fade" @before-enter="beforeEnter" @leave="leave">
           <SelectWhiskey
-            v-if="currentStep === Step.SelectWhiskey"
+            v-if="isStep(Step.SelectWhiskey)"
             class="flex flex-row justify-start items-center transition-opacity"
             @selected="handleNext(bottleStore.hasWhiskey)"
           >
             <template #navigation>
-              <Navigation
-                class="justify-end"
-                @next="handleNext"
-                @previous="handlePrevious"
-                :current-step="currentStep"
-                :number-of-steps="steps.length"
-              />
+              <Navigation class="justify-end" @next="handleNext" @previous="handlePrevious" />
             </template>
           </SelectWhiskey>
         </Transition>
@@ -58,8 +52,6 @@
                 class="justify-end"
                 @next="handleNext(bottleStore.hasBottle)"
                 @previous="handlePrevious"
-                :current-step="currentStep"
-                :number-of-steps="steps.length"
               />
             </template>
           </SelectBottle>
@@ -74,8 +66,6 @@
                 class="justify-end"
                 @next="handleNext(bottleStore.hasBottleTop)"
                 @previous="handlePrevious"
-                :current-step="currentStep"
-                :number-of-steps="steps.length"
               />
             </template>
           </SelectBottleTop>
@@ -91,8 +81,6 @@
                 class="justify-end"
                 @next="handleNext(bottleStore.isValid)"
                 @previous="handlePrevious"
-                :current-step="currentStep"
-                :number-of-steps="steps.length"
               />
             </template>
           </BottleReview>
@@ -103,7 +91,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
+
+import { Step } from '@/constants'
 
 import SelectWhiskey from '@/components/SelectWhiskey.vue'
 import SelectBottle from '@/components/SelectBottle.vue'
@@ -120,21 +110,18 @@ import router from '@/router'
 import { useImagePreloader } from '@/composables/useImagePreloader'
 import { variantImages } from '@/constants'
 
+import { useNavigation } from '@/composables/navigation'
+
+const route = router.currentRoute
+
 const isLoadingTimeoutOver = ref(false)
 const { isLoading } = useImagePreloader(variantImages)
+
+const { currentStep, next, previous, hasNext, hasPrevious, isStep } = useNavigation()
 
 const bottleStore = useBottleStore()
 
 const isCheckout = ref(false)
-
-const enum Step {
-  SelectWhiskey = 0,
-  SelectBottle,
-  SelectTop,
-  Review
-}
-
-const steps = ref([Step.SelectWhiskey, Step.SelectBottle, Step.SelectTop, Step.Review])
 
 function beforeEnter(el: Element) {
   ;(el as HTMLElement).style.opacity = '1'
@@ -144,8 +131,6 @@ function leave(el: Element, done: () => void) {
   ;(el as HTMLElement).style.opacity = '0'
   done() // Ensure the transition ends immediately
 }
-
-const currentStep = ref<Step>(Step.SelectWhiskey)
 
 const backgroundImageStyle = computed(() => {
   return {
@@ -158,20 +143,12 @@ const shouldDisplayLoader = computed(() => {
 })
 
 function handlePrevious() {
-  if (currentStep.value > 0) {
-    currentStep.value--
-  } else {
-    router.back()
-  }
+  previous()
 }
 
 function handleNext(valid: boolean = true) {
   if (!valid) return
-  if (currentStep.value < steps.value.length - 1) {
-    currentStep.value++
-  } else {
-    //Submit
-  }
+  next()
 }
 
 function handleCheckout() {

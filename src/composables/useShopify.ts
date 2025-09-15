@@ -3,10 +3,14 @@ import { createStorefrontApiClient } from '@shopify/storefront-api-client'
 import * as Queries from '@/graphql/queries'
 import * as Mutations from '@/graphql/mutations'
 
+import { useEnv } from '@/composables/useEnv'
+
+const { shopify } = useEnv()
+
 const client = createStorefrontApiClient({
-  storeDomain: 'http://befa28-22.myshopify.com',
+  storeDomain: shopify.storefront.domain,
   apiVersion: '2024-04',
-  publicAccessToken: 'a3d94948b073f1990f0eb475a11c8890'
+  publicAccessToken: shopify.storefront.apiKey
 })
 
 export function useShopify() {
@@ -19,17 +23,20 @@ export function useShopify() {
     return response
   }
 
-  async function createCart(id: string, wax: string, text?: string) {
-    const attributes = [{ key: 'Wax', value: wax }]
-    if (text) {
-      attributes.push({ key: 'Text', value: text })
+  async function createCart(item: { id: string; wax: string; text?: string }, quantity: number) {
+    const attributes = [{ key: 'Wax', value: item.wax }]
+
+    if (item.text) {
+      attributes.push({ key: 'Text', value: item.text })
     }
+
     const response = await client.request(Mutations.createCart, {
       variables: {
         lines: [
           {
-            merchandiseId: `${id}`,
-            attributes
+            merchandiseId: `${item.id}`,
+            attributes,
+            quantity
           }
         ]
       }

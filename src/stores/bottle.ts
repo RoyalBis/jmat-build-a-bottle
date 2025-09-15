@@ -4,10 +4,10 @@ import { useStorage } from '@vueuse/core'
 
 import type { Bottle, BottleTop, Whiskey } from '@/types'
 
-const woodCork = {
-  name: 'Wood Cork',
-  value: 'WoodCork',
-  color: 'transparent'
+const DEFAULT_CORK = {
+  color: '#FFFFFF',
+  name: 'Red',
+  value: 'RedWax'
 }
 
 export const useBottleStore = defineStore('bottle', () => {
@@ -23,7 +23,7 @@ export const useBottleStore = defineStore('bottle', () => {
       write: (v: any) => JSON.stringify(v)
     }
   })
-  const bottleTop = useStorage<BottleTop | null>('bottleTop', woodCork, undefined, {
+  const bottleTop = useStorage<BottleTop | null>('bottleTop', DEFAULT_CORK, undefined, {
     serializer: {
       read: (v: any) => (v ? JSON.parse(v) : null),
       write: (v: any) => JSON.stringify(v)

@@ -52,15 +52,34 @@
             @mouseout="clearPreview()"
           />
         </div>
+        <p v-if="app.orderCutoff.show" class="font-body text-sm text-white">
+          {{ app.orderCutoff.message }}
+        </p>
+        <!-- <p class="font-body text-sm text-white">
+          Special Father's Day Pricing -
+          <span class="font-body text-sm text-white line-through">$155</span> $99!
+        </p> -->
       </div>
       <div class="w-full">
-        <p class="font-header text-lg text-white">Customize your label:</p>
+        <div v-if="isVerticalLayout">
+          <p v-if="app.orderCutoff.show" class="font-body text-sm text-white">
+            {{ app.orderCutoff.message }}
+          </p>
+          <!-- <p class="font-body text-sm text-white">
+            Special Father's Day Pricing -
+            <span class="font-body text-sm text-white line-through">$155</span> $99!
+          </p> -->
+        </div>
+        <p class="font-header text-lg text-white">
+          Customize your label: <span class="text-red-500">{{ validationMessage }}</span>
+        </p>
         <textarea
           v-model="bottleStore.bottleText"
           class="w-full p-4 resize-none rounded-0 h-24 bg-black border border-white text-white"
+          :maxlength="app.label.characterLimit"
         ></textarea>
         <p class="font-body text-xs text-white">
-          Make it personal. Use up to 25 characters. Have fun.
+          Make it personal. Use up to {{ app.label.characterLimit }} characters. Have fun.
         </p>
       </div>
       <div class="w-full md:block hidden">
@@ -81,13 +100,23 @@ import { useBottleStore } from '@/stores/bottle'
 import { bottleTops } from '@/constants'
 import type { BottleTop } from '@/types'
 
+import { useEnv } from '@/composables/useEnv'
+
 import LabeledBottle from './LabeledBottle.vue'
 
+const { app } = useEnv()
+
 const isVerticalLayout = ref<boolean>(true)
-
 const bottleStore = useBottleStore()
-
 const previewImage = ref<string | null>(null)
+
+const validationMessage = computed(() => {
+  if (bottleStore.bottleText?.length === app.label.characterLimit) {
+    return `Maximum ${app.label.characterLimit} characters.`
+  } else {
+    return ''
+  }
+})
 
 const image = computed(() => {
   return previewImage.value ?? bottleStore.bottleImage
